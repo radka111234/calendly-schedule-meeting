@@ -14,7 +14,7 @@ USER_EMAIL = "radarudova@gmail.com"
 UK_TIMEZONE = "UK"  # Adjust if needed
 MEETING_TYPE = "Google Meet"
 DATE = "1"  # Date to select
-TIME = "16:00"  # Time to select
+TIME = "13:45"  # Time to select
 
 try:
     print("🔧 Setting up Chrome options...")
