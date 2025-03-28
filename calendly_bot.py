@@ -8,12 +8,12 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 # User details
-CALENDLY_URL = "https://calendly.com/matejotys/30minutes"
+CALENDLY_URL = "https://calendly.com/matejotys/30minutes?month=2025-04"
 USER_NAME = "Radka Test"
 USER_EMAIL = "radarudova@gmail.com"
 UK_TIMEZONE = "UK"  # Adjust if needed
 MEETING_TYPE = "Google Meet"
-DATE = "31"  # Date to select
+DATE = "1"  # Date to select
 TIME = "15:00"  # Time to select
 
 try:
