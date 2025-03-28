@@ -14,7 +14,7 @@ USER_EMAIL = "radarudova@gmail.com"
 UK_TIMEZONE = "UK"  # Adjust if needed
 MEETING_TYPE = "Google Meet"
 DATE = "1"  # Date to select
-TIME = "15:00"  # Time to select
+TIME = "16:00"  # Time to select
 
 try:
     print("🔧 Setting up Chrome options...")
@@ -54,8 +54,7 @@ try:
     ### STEP 2: Select Date ###
     print("📅 Selecting date...")
     wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "[data-testid='calendar']")))
-    date_button = wait.until(EC.element_to_be_clickable((By.XPATH, f"//button[contains(@aria-label, 'March {DATE}') and contains(@aria-label, 'Times available')]")))
-    date_button.click()
+    date_select = driver.find_element(By.XPATH,'/html/body/div[1]/div/div/div/div/div[2]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]/button').click()
     time.sleep(4)
 
     ### STEP 3: Select Time Slot ###
