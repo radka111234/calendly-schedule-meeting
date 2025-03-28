@@ -1,7 +1,7 @@
 # Use official Python image
-FROM zenika/python-chrome:3.10
+FROM python:3.10-slim
 
-# Install Chrome dependencies
+# Install Chrome + dependencies
 RUN apt-get update && apt-get install -y \
     wget \
     unzip \
@@ -22,12 +22,12 @@ RUN apt-get update && apt-get install -y \
 
 # Install Google Chrome
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-chrome.gpg && \
-    sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' && \
+    echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
     apt-get update && \
     apt-get install -y google-chrome-stable
 
 # Install ChromeDriver
-RUN CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
+RUN CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
     wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip && \
     unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
     chmod +x /usr/local/bin/chromedriver && \
@@ -36,17 +36,17 @@ RUN CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_R
 # Set environment variable for display (headless)
 ENV DISPLAY=:99
 
-# Create app directory
+# Set working directory
 WORKDIR /app
 
-# Copy everything to app directory
+# Copy app files
 COPY . .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the Flask port
+# Expose Flask port
 EXPOSE 5000
 
-# Run the app
+# Start Flask app
 CMD ["python", "app.py"]
